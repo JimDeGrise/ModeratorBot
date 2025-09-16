@@ -41,6 +41,7 @@ coverage.xml
 .hypothesis/
 .pytest_cache/
 
+
 # Environment variables
 .env
 .venv
@@ -49,6 +50,7 @@ venv/
 ENV/
 env.bak/
 venv.bak/
+
 
 # Database files
 *.db
@@ -59,12 +61,19 @@ data/
 # Logs
 *.log
 logs/
+# Database
+data/
+*.db
+*.sqlite
+*.sqlite3
+
 
 # IDE
 .vscode/
 .idea/
 *.swp
 *.swo
+
 *~
 
 # OS
@@ -82,5 +91,25 @@ bot_session*
 # Temporary files
 tmp/
 temp/
+
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+logs/
+
+# Testing
+.coverage
+.pytest_cache/
+.tox/
+.nox/
+htmlcov/
+
+# Temporary files
+/tmp/
+
 *.tmp
 *.temp

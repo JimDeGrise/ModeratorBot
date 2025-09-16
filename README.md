@@ -1,5 +1,6 @@
 # ModeratorBot
 
+
 A sophisticated Telegram moderation bot with auto-mute functionality, rate limiting, and escalation logic. The bot automatically mutes users who send too many messages in a short time period and applies progressively longer mutes for repeat offenders.
 
 ## Features
@@ -28,15 +29,36 @@ A sophisticated Telegram moderation bot with auto-mute functionality, rate limit
 - A Telegram Bot Token (get one from [@BotFather](https://t.me/BotFather))
 
 ### 1. Clone the Repository
+
+Telegram бот для модерации групп с функциями анти-флуда, фильтрации ссылок и капчи.
+
+## Функции
+
+- 🛡️ **Анти-флуд** - автоматическое заглушение при превышении лимита сообщений
+- 🔗 **Фильтрация ссылок** - контроль разрешенных доменов
+- 🚫 **Фильтр запрещенных слов** - автоматическое удаление нежелательного контента
+- 🧩 **Капча для новых участников** - проверка на ботов
+- ⚠️ **Система предупреждений** - накопительные предупреждения с авто-наказанием
+- 👮 **Команды модерации** - мут, кик, управление предупреждениями
+
+## Установка
+
+1. Клонируйте репозиторий:
+
 ```bash
 git clone https://github.com/JimDeGrise/ModeratorBot.git
 cd ModeratorBot
 ```
 
+
 ### 2. Install Dependencies
+
+2. Установите зависимости:
+
 ```bash
 pip install -r requirements.txt
 ```
+
 
 ### 3. Configuration
 Copy the example environment file and configure it:
@@ -243,3 +265,64 @@ For support and questions:
 - Create an issue on GitHub
 - Check existing issues for solutions
 - Review the troubleshooting section
+
+3. Скопируйте и настройте конфигурацию:
+```bash
+cp .env.example .env
+# Отредактируйте .env файл с вашими настройками
+```
+
+4. Запустите бота:
+```bash
+python main.py
+```
+
+## Настройка
+
+Все настройки производятся через переменные окружения в файле `.env`:
+
+- `BOT_TOKEN` - токен Telegram бота
+- `ADMIN_IDS` - список ID администраторов через запятую
+- `RULES` - текст правил сообщества
+- `ANTIFLOOD_MAX_MESSAGES` - максимум сообщений за период
+- `ANTIFLOOD_WINDOW_SECONDS` - период для подсчета сообщений
+- `WARNS_TO_PUNISH` - количество предупреждений до авто-мута
+- `AUTO_MUTE_HOURS` - часы мута за превышение предупреждений
+- `ALLOWED_DOMAINS` - разрешенные домены для ссылок
+- `BANNED_WORDS` - запрещенные слова через запятую
+- `CAPTCHA_TIMEOUT_SECONDS` - время на решение капчи
+- `DB_PATH` - путь к файлу базы данных
+
+## Команды
+
+### Для администраторов:
+- `/start` - информация о боте (в личных сообщениях)
+- `/rules` - показать правила группы
+- `/warn` - выдать предупреждение (ответ на сообщение)
+- `/unwarn` - снять предупреждения (ответ на сообщение)
+- `/mute [часы] [причина]` - заглушить пользователя (ответ на сообщение)
+- `/kick [причина]` - исключить пользователя (ответ на сообщение)
+- `/warnings` - показать количество предупреждений (ответ на сообщение)
+
+## Архитектура
+
+Проект состоит из нескольких модулей:
+
+- `main.py` - основной модуль с обработчиками команд и сообщений
+- `config.py` - управление конфигурацией с singleton паттерном
+- `utils.py` - вспомогательные функции для модерации
+- `database.py` - работа с базой данных SQLite
+
+### Ключевые оптимизации:
+
+1. **Singleton конфигурация** - предотвращает повторную загрузку переменных окружения
+2. **Унифицированная проверка команд** - функция `is_command_message()` используется везде
+3. **Детальное логирование ошибок** - подробные логи для функций mute/kick
+4. **Обработка исключений** - все критические участки обернуты в try/except
+5. **Типизация** - добавлены type hints для всех функций
+6. **Тихие уведомления** - все reply используют `disable_notification=True`
+
+## Лицензия
+
+MIT License
+
