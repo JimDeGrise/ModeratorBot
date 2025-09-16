@@ -23,6 +23,25 @@ share/python-wheels/
 *.egg
 MANIFEST
 
+# PyInstaller
+*.manifest
+*.spec
+
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+.hypothesis/
+.pytest_cache/
+
+
 # Environment variables
 .env
 .venv
@@ -32,17 +51,47 @@ ENV/
 env.bak/
 venv.bak/
 
+
+# Database files
+*.db
+*.sqlite
+*.sqlite3
+data/
+
+# Logs
+*.log
+logs/
 # Database
 data/
 *.db
 *.sqlite
 *.sqlite3
 
+
 # IDE
 .vscode/
 .idea/
 *.swp
 *.swo
+
+*~
+
+# OS
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Telegram bot specific
+bot_session*
+
+# Temporary files
+tmp/
+temp/
+
 
 # OS
 .DS_Store
@@ -61,5 +110,6 @@ htmlcov/
 
 # Temporary files
 /tmp/
+
 *.tmp
 *.temp
